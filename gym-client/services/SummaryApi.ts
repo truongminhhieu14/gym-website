@@ -72,12 +72,25 @@ const SummaryApi: Record<string, ApiConfig> = {
   },
   createTestimonial: {
     url: `${backendDomin}/api/testimonial`,
-    method: "post"
+    method: "post",
   },
   getAllTestimonial: {
     url: `${backendDomin}/api/testimonial`,
-    method: "get"
-  }
+    method: "get",
+  },
+  getAllBlogs: {
+    url: `${backendDomin}/api/blogs`,
+    method: "get",
+  },
+  createBlogs: {
+    url: `${backendDomin}/api/blogs`,
+    method: "post",
+  },
+  getBlogBySlug: {
+    url: `${backendDomin}/api/blogs`,
+    method: "get",
+  },
+  
 };
 
 export default SummaryApi;

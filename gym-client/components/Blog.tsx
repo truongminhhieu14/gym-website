@@ -13,6 +13,9 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/variants";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import SummaryApi from "@/services/SummaryApi";
 
 const blogData = [
   {
@@ -64,7 +67,29 @@ const blogData = [
     href: "",
   },
 ];
+interface BlogType {
+  _id: string;
+  img: string;
+  date: string;
+  title: string;
+  slug: string;
+}
 const Blog = () => {
+  const [blogs, setBlogs] = useState<BlogType[]>([]);
+  
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const response = await fetch(SummaryApi.getAllBlogs.url)
+        const data = await response.json()
+        setBlogs(data.blogs || data || [])
+      } catch (err) {
+        toast.error("Error fetching blogs")
+        
+      }
+    }
+    fetchBlogs();
+  }, [])
   return (
     <section className="bg-primary-300 text-white py-24" id="blog">
       <div>
@@ -101,24 +126,28 @@ const Blog = () => {
             }}
             className="h-[420px] md:max-w-[660px] lg:max-w-none mb-8"
           >
-            {blogData.map((post, index) => {
+            {blogs.map((post, index) => {
               return (
                 <SwiperSlide key={index}>
                   <div className="flex flex-col justify-start h-full max-w-[320px] mx-auto">
                     <Image
                       src={post.img}
-                      width={320}
+                      width={220}
                       height={266}
                       alt=""
                       className="mb-6"
                     />
                     <div className="flex flex-col items-start">
                       <p className="max-w-[380px] uppercase text-[12px] tracking-[3px] mb-1">
-                        {post.date}
+                      {new Date(post.date).toLocaleDateString("vi-VN", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
                       </p>
                       <Link
                         className="hover:text-accent transition-all duration-300"
-                        href={post.href}
+                        href={`/blog/${post.slug}`}
                       >
                         <h5 className="h5">{post.title}</h5>
                       </Link>
@@ -140,10 +169,10 @@ const Blog = () => {
           whileInView={"show"}
           viewport={{ once: false, amount: 0.2 }}
         >
-          <CustomButton
+          {/* <CustomButton
             containerStyles="block w-[196px] h-[62px] mx-auto"
             text="View all"
-          />
+          /> */}
         </motion.div>
       </div>
     </section>

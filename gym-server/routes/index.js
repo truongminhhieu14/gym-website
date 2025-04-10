@@ -20,6 +20,7 @@ const webhooks = require('../controller/payment/webhook')
 const membershipController = require('../controller/payment/membershipController')
 const getClassDetailController = require('../controller/classes/getClassDetails')
 const { createTestimonial, getAllTestimonials } = require('../controller/testimonial/testimonialController')
+const { getAllBlogs, getBlogBySlug, createBlog } = require('../controller/blog/blogController')
 
 
 
@@ -48,6 +49,11 @@ router.get("/class/:className", getClassDetailController)
 // testimonial
 router.post("/testimonial",authMiddleware, createTestimonial)
 router.get("/testimonial", getAllTestimonials)
+
+// blog
+router.get("/blogs", getAllBlogs);
+router.get("/blogs/:slug", getBlogBySlug)
+router.post("/blogs",authMiddleware, createBlog)
 
 // payment
 router.post("/checkout",authMiddleware, paymentController)
