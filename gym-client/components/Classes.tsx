@@ -4,35 +4,38 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/variants";
 import CustomButton from "./CustomButton";
-import { div } from "framer-motion/client";
+import Link from "next/link";
 
 const classes = [
   {
-    name: "body building",
-    img: "/assets/assets/img/classes/bodybuilding.jpg",
+    name: "gym",
+    img: "/assets/assets/img/classes/gym.jpg",
     description:
-      "Focus on building muscle through weight training and a scientific diet to get the most toned, balanced and aesthetic body.",
+      "Enhance your physical strength and overall fitness with guided workouts using free weights and machines. Ideal for building muscle, endurance, and improving body composition.",
   },
   {
-    name: "cardio",
-    img: "/assets/assets/img/classes/cardio.jpg",
+    name: "yoga",
+    img: "/assets/assets/img/classes/yoga.jpg",
     description:
-      "Cardiovascular exercise increases your heart rate, burns calories, and improves your respiratory system and endurance. Cardio is important for fat loss, improving cardiovascular health, and improving overall fitness..",
+      "A mindful practice that combines breathing techniques, meditation, and poses to improve flexibility, reduce stress, and enhance mental clarity and body awareness., and improves your respiratory system and endurance. Cardio is important for fat loss, improving cardiovascular health, and improving overall fitness..",
   },
   {
-    name: "fitness",
-    img: "/assets/assets/img/classes/fitness.jpg",
+    name: "pilates",
+    img: "/assets/assets/img/classes/pilates.jpg",
     description:
-      "a lifestyle that promotes physical and mental health through exercise, nutrition, and rest.",
+      "Strengthen your core, improve posture, and develop a lean, balanced body with controlled, low-impact movements focused on alignment and flexibility.",
   },
   {
-    name: "crossfit",
-    img: "/assets/assets/img/classes/crossfit.jpg",
+    name: "kick boxing",
+    img: "/assets/assets/img/classes/kickboxing.jpg",
     description:
-      "High-intensity interval training (HIIT) combines strength, conditioning, cardio, and functional movement exercises.",
+      "A high-energy workout that blends martial arts techniques and cardio to boost stamina, coordination, and burn calories while relieving stress.",
   },
 ];
 const Classes = () => {
+  const handleClick = (className: string) => {
+    console.log("Class clicked:", className); // Hành động bổ sung (nếu cần)
+  };
   return (
     <section id="class">
       <motion.div
@@ -77,10 +80,17 @@ const Classes = () => {
                   whileInView={"show"}
                   viewport={{ once: false, amount: 0.2 }}
                 >
-                  <CustomButton
-                    containerStyles="w-[164px] h-[46px]"
-                    text="Read more"
-                  />
+                  <Link href={{
+                      pathname: "/class",
+                      query: { className: item.name},
+                    }}>
+                    <CustomButton
+                      containerStyles="w-[164px] h-[46px]"
+                      text="Read more"
+                      onClick={()=>handleClick(item.name)}
+                    
+                    />
+                  </Link>
                 </motion.div>
               </div>
             </div>

@@ -10,28 +10,34 @@ import { fadeIn } from "@/lib/variants";
 
 //components
 import Achievements from "./Achievements";
+import { useRouter } from "next/navigation";
 
-const featured = [
-  {
-    icon: <FaUsers />,
-    title: "award-winning trainers",
-    subtitle:
-      "Let our trainers accompany and support you in achieving your health goals.",
-  },
-  {
-    icon: <IoIosPricetag />,
-    title: "excellent trainers",
-    subtitle:
-      "Let our trainers accompany and support you in achieving your health goals.",
-  },
-  {
-    icon: <FaDumbbell />,
-    title: "modern equipment",
-    subtitle:
-      "Let our trainers accompany and support you in achieving your health goals.",
-  },
-];
+
+
 const About = () => {
+  const router = useRouter();
+  const featured = [
+    {
+      icon: <FaUsers />,
+      title: "Top Coach",
+      subtitle:
+        "Good trainers will help you achieve your fitness goals quickly.",
+      onclick: () => router.push("top-trainers"),
+    },
+    {
+      icon: <IoIosPricetag />,
+      title: "Reasonable price",
+      subtitle:
+        "Flexible training packages to suit every budget.",
+    },
+    {
+      icon: <FaDumbbell />,
+      title: "modern equipment",
+      subtitle:
+        "Advanced exercise machine system supports maximum training.",
+    },
+  ];
+  
   return (
     <section className="pt-8 pb-14 lg:pb-28" id="about">
       <div className="container mx-auto">
@@ -67,7 +73,9 @@ const About = () => {
           {featured.map((feature, index) => {
             return (
               <div
-                className="flex flex-col justify-center items-center gap-4 border p-10"
+                className={`flex flex-col justify-center items-center gap-4 border p-10 
+                  ${feature.onclick ? "cursor-pointer hover:bg-gray-100 transition" : ""}`}
+                onClick={feature.onclick}
                 key={index}
               >
                 <div className="text-4xl bg-primary-300 text-white w-[80px] h-[80px] rounded-full flex justify-center items-center">

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { MdClose } from "react-icons/md";
 import { FaC, FaCheck } from "react-icons/fa6";
 
@@ -15,20 +14,23 @@ import { Pagination } from "swiper/modules";
 // swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
+import SummaryApi from "@/services/SummaryApi";
+import { loadStripe } from "@stripe/stripe-js";
+import { usePayment } from "@/hooks/usePayment";
 
 // membership data
 const membershipData = [
   {
-    title: "Standard",
-    price: "30",
+    title: "Silver",
+    price: "300000",
     benefits: [
       {
         icon: FaCheck,
-        text: "Includes membership",
+        text: "Access to Gym & KickBoxing zones",
       },
       {
         icon: FaCheck,
-        text: "Access to all gym facilities",
+        text: "Full-time training",
       },
       {
         icon: MdClose,
@@ -36,37 +38,25 @@ const membershipData = [
       },
       {
         icon: FaCheck,
-        text: "Health and fitness tips",
-      },
-      {
-        icon: MdClose,
-        text: "Monday-Friday gym access",
-      },
-      {
-        icon: FaCheck,
-        text: "Full access to everything",
-      },
-      {
-        icon: MdClose,
-        text: "No additional amenities",
+        text: "Sauna, towel, lockers, and drinking water are free",
       },
     ],
   },
   {
-    title: "Ultimate",
-    price: "45",
+    title: "Black",
+    price: "450000",
     benefits: [
       {
         icon: FaCheck,
-        text: "Includes membership",
+        text: "Unlimited access to all training zones",
       },
       {
         icon: FaCheck,
-        text: "Access to all gym facilities",
+        text: "Sauna, towels, lockers, and drinking water are free",
       },
       {
         icon: FaCheck,
-        text: "Diet plan included",
+        text: "Opportunity to receive additional training months and promotional vouchers",
       },
       {
         icon: FaCheck,
@@ -87,8 +77,8 @@ const membershipData = [
     ],
   },
   {
-    title: "Professional",
-    price: "60",
+    title: "Blue",
+    price: "600000",
     benefits: [
       {
         icon: FaCheck,
@@ -121,7 +111,10 @@ const membershipData = [
     ],
   },
 ];
+
 const MembershipSlider = () => {
+  const {handlePayment} = usePayment();
+  
   return (
     <Swiper
       slidesPerView={1}
@@ -162,11 +155,11 @@ const MembershipSlider = () => {
                 </ul>
                 {/* price */}
                 <p className="text-accent mb-8 flex gap-1 items-center">
-                    <sup className="text-4xl">$</sup>
-                    <strong className="text-6xl">{item.price}</strong>
+                    <sup className="text-3xl">đ</sup>
+                    <strong className="text-5xl">{item.price}</strong>
                     <em className="self-end text-2xl">/month</em>
                 </p>
-                <CustomButton containerStyles="w-[196px] h-[62px]" text="Buy now" />
+                <CustomButton containerStyles="w-[196px] h-[62px]" text="Buy now" onClick={() => handlePayment(item)}/>
               </div>
             </div>
           </SwiperSlide>
@@ -174,6 +167,5 @@ const MembershipSlider = () => {
       })}
     </Swiper>
   );
-};
-
+}
 export default MembershipSlider;

@@ -38,7 +38,7 @@ const adminPanel = () => {
           <Link href="/adminPanel/personal-data" className="px-2 py-1 hover:bg-gray-100 rounded">📊 Phân tích dữ liệu cá nhân</Link>
           <Link href="/adminPanel/promotions" className="px-2 py-1 hover:bg-gray-100 rounded">🎁 Chương trình khuyến mãi</Link>
           <Link href="/adminPanel/support" className="px-2 py-1 hover:bg-gray-100 rounded">🛠️ Hỗ trợ & giải quyết vấn đề</Link>
-          <Link href="/adminPanel/courses" className="px-2 py-1 hover:bg-gray-100 rounded">📚 Tổ chức khóa học & đào tạo</Link>
+          <Link href="/adminPanel/all-class" className="px-2 py-1 hover:bg-gray-100 rounded">📚 Tổ chức khóa học & đào tạo</Link>
         </nav>
       </aside>
 

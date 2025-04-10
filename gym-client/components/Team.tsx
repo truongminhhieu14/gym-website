@@ -7,7 +7,7 @@ import CustomButton from "./CustomButton";
 
 import { motion } from "framer-motion";
 import { fadeIn } from "@/lib/variants";
-import { image, img } from "framer-motion/client";
+import { useRouter } from "next/navigation";
 
 const trainerData = [
   {
@@ -56,6 +56,7 @@ const trainerData = [
   },
 ];
 const Team = () => {
+  const router = useRouter();
   return (
     <section className="py-12 xl:h-[110vh]" id="team">
       <div className="container mt-auto h-full flex flex-col items-center justify-center">
@@ -125,6 +126,7 @@ const Team = () => {
           <CustomButton
             containerStyles="w-[196px] h-[62px]"
             text="See all trainers"
+            onClick={() => router.push("/top-trainers")}
           />
         </motion.div>
       </div>

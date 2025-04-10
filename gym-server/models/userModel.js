@@ -8,6 +8,8 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     password: String,
+    phone: String, // chỉ dùng cho trainers
+    specialization: String, //chỉ dùng cho trainers
     role: {
         type: String,
         enum: ["admin", "trainer", "member"],
