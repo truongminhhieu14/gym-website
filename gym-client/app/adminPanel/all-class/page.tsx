@@ -5,6 +5,11 @@ import UploadClass from "@/components/UploadClass";
 import SummaryApi from "@/services/SummaryApi";
 import React, { useEffect, useState } from "react";
 
+interface Rating {
+  userId: string;
+  content: string;
+  stars: number;
+}
 // Define the type for a single class object
 interface GymClass {
   _id: string;
@@ -13,6 +18,12 @@ interface GymClass {
   schedule: string;
   classImage: string[];
   description: string;
+  duration: number;
+  maxParticipants: number;
+  currentParticipants: number;
+  status: string;
+  goals: string[];
+  ratings: Rating[];
 }
 
 const AllClasses = () => {
@@ -51,18 +62,16 @@ const AllClasses = () => {
         </button>
       </div>
 
-      {/* Hiển thị tất cả lớp tập gym */}
       <div className="flex items-center flex-wrap gap-5 py-4 h-[calc(100vh-190px)] overflow-y-scroll">
-        {allClasses.map((gymClass, index) => (
+        {allClasses.map((gymClass) => (
           <AdminClassCard
+            key={gymClass._id}
             data={gymClass}
-            key={index + "allClasses"}
             fetchData={fetchAllClasses}
           />
         ))}
       </div>
 
-      {/* Upload class component */}
       {openUploadClass && (
         <UploadClass
           onClose={() => setOpenUploadClass(false)}

@@ -67,6 +67,9 @@ const webhooks = async(request, response) => {
       }
       const memberships = new membershipModel(membershipDetail)
       const saveMembership = await memberships.save()
+
+      console.log("save", saveMembership)
+
       break;
 
     case 'payment_method.attached':

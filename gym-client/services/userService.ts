@@ -19,7 +19,7 @@ const fetchUserDetails = () => {
       }
     } catch (err) {
       //console.log("🚀 ~ fetchUserDetails ~ err:", err);
-      toast.error("Error fetching user details!");
+      //toast.error("Error fetching user details!");
     }
   };
 };
